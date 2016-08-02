@@ -25,8 +25,8 @@ class PathCostFinder:
         for v, w in self.__pairwise(path):
             cost_list = graph.shortest_paths_dijkstra(v, w, weights="weight")
             cost = sum(i[0] for i in cost_list)
-            print(cost)
-            print("{0} -> {1} cost {2}".format(v, w, cost))
+            #print(cost)
+            #print("{0} -> {1} cost {2}".format(v, w, cost))
             total_cost = total_cost + cost
 
         return total_cost

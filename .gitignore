@@ -93,4 +93,7 @@ algo/.idea/
 
 # Others
 algo/*.csv
+data/
+output/
+plots/
 
