@@ -22,23 +22,21 @@ def main(argv):
     # load graph
     g = FileUtils.loadGraph(options['inputfile'], options['metafile'])
 
-
     # plot graph
     FileUtils.plotGraph(options['plotfile'], g)
 
 
-    # generate graph [REMOVE ME]
-    #g = Graph.GRG(30, 0.5)
-    #g.es["weight"] = [randint(1, 5) for e in g.es]
-
-    # get vertexes list
-    vts = [v.index for v in g.vs]
 
     # reset file state
     try:
         os.remove(options['outputfile'])
     except OSError:
         pass
+
+    # get vertexes list
+    vts = [v.index for v in g.vs if v['treasure']]
+
+    #actual_vts = [64,65,66,69,82,79,107,135,133,111,116,119,124,152,130,131,149,145,141,156,162,161,163,38,31,25,2,1,11,13,15,18,52,50,44,96,101,102,139,99,98] #cost 246
 
     pcf = PathCostFinder()
 
@@ -48,7 +46,7 @@ def main(argv):
 
         #calculate the traversing cost
         cost = pcf.pathCost(g, vts)
-        #print("total cost is {0}".format(cost))
+        print("total cost is {0}".format(cost))
 
         # log the entry
         FileUtils.writePath(options['outputfile'], vts, cost)

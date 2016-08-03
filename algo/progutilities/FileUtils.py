@@ -45,6 +45,7 @@ class FileUtils:
 
         g.vs['y'] = list(map((lambda x: x * -1), columns['Lat']))
         g.vs['x'] = columns['Long']
+        g.vs['treasure'] = [True if v > 0 else False for v in columns['Treasure']]
 
         g = FileUtils.__calculateWeightsOnDistance(g)
 
