@@ -22,11 +22,10 @@ def main(argv):
     # load graph
     g = FileUtils.loadGraph(options['inputfile'], options['metafile'])
 
-    # assign edge weights
-    g.es["weight"] = [1 for e in g.es]
 
     # plot graph
-    #FileUtils.plotGraph(options['plotfile'], g)
+    FileUtils.plotGraph(options['plotfile'], g)
+
 
     # generate graph [REMOVE ME]
     #g = Graph.GRG(30, 0.5)

@@ -1,10 +1,31 @@
 
 
 import csv
+
+import numpy
 from igraph import *
+import math
 
 
 class FileUtils:
+
+    @staticmethod
+    def __distance(x1,x2, y1, y2):
+        return math.sqrt((x1-x2)**2 + (y1-y2)**2)
+
+
+    @staticmethod
+    def __calculateWeightsOnDistance(g):
+
+        distance = [FileUtils.__distance(g.vs[e.source]['x'],
+                                         g.vs[e.target]['x'],
+                                         g.vs[e.source]['y'],
+                                         g.vs[e.target]['y']) for e in g.es]
+
+        freq, bins = numpy.histogram(distance, bins=4)
+        g.es["weight"] = numpy.digitize(distance, bins)
+
+        return g
 
     @staticmethod
     def loadGraph(inputfile, metafile):
@@ -25,6 +46,8 @@ class FileUtils:
         g.vs['y'] = list(map((lambda x: x * -1), columns['Lat']))
         g.vs['x'] = columns['Long']
 
+        g = FileUtils.__calculateWeightsOnDistance(g)
+
         return g
 
     @staticmethod
@@ -43,4 +66,4 @@ class FileUtils:
 
         # layout = g1.layout("kk")
         plot(graph, "../plots/coords-graph-plot.png", layout=coords, bbox=(403, 832), vertex_size=22,
-             vertex_color='#ff3300', background=None)
+             vertex_color='#ff3300', background=None) #, edge_width=graph.es['weight']
