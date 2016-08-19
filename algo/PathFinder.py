@@ -22,10 +22,15 @@ def main(argv):
     # load graph
     g = FileUtils.loadGraph(options['inputfile'], options['metafile'])
 
+    #for v in g.vs:
+    #    print("{0},".format(v.degree()))
+
+
     # plot graph
     FileUtils.plotGraph(options['plotfile'], g)
 
 
+    exit(0)
 
     # reset file state
     try:

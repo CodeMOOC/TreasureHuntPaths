@@ -34,6 +34,8 @@ class FileUtils:
 
         g.vs["label"] = [v.index + 1 for v in g.vs]
 
+        g.vs["color"] = ["green" if v.degree() % 2 == 0 else "red" for v in g.vs]
+
         columns = defaultdict(list)  # each value in each column is appended to a list
 
         with open(metafile) as f:
@@ -67,4 +69,5 @@ class FileUtils:
 
         # layout = g1.layout("kk")
         plot(graph, "../plots/coords-graph-plot.png", layout=coords, bbox=(403, 832), vertex_size=22,
-             vertex_color='#ff3300', background=None) #, edge_width=graph.es['weight']
+              #vertex_color='#ff3300',
+              background=None) #, edge_width=graph.es['weight']
